@@ -16,6 +16,7 @@ services:
       PORT: 3030
     depends_on:
       - mysql
+    restart: always
   mysql:
     image: mysql
     environment:

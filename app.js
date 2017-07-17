@@ -83,12 +83,9 @@ const migrationQuery = `
 connection.query(migrationQuery, function (error, results, fields) {
     if (error) throw error;
 
-    console.log('The solution is: ', results[0].solution);
-
     http.createServer(app).listen(app.get('port'), function(){
-        console.log('Express server listening on2 port ' + app.get('port'));
+        console.log('Express server listening on port ' + app.get('port'));
     });
-
 });
 
 connection.end();
