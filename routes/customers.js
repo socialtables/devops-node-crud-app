@@ -5,8 +5,12 @@
 
 exports.list = function(req, res){
 
-  req.getConnection(function(err,connection){
+  req.getConnection(function(err, connection){
        
+        if(err){
+            console.log("ERROR : %s ", err);
+        }
+
         var query = connection.query('SELECT * FROM customer',function(err,rows)
         {
             
@@ -17,8 +21,6 @@ exports.list = function(req, res){
                 
            
          });
-         
-         //console.log(query.sql);
     });
   
 };
@@ -32,7 +34,11 @@ exports.edit = function(req, res){
     var id = req.params.id;
     
     req.getConnection(function(err,connection){
-       
+        if(err){
+            console.log("ERROR : %s ", err);
+        }
+        
+
         var query = connection.query('SELECT * FROM customer WHERE id = ?',[id],function(err,rows)
         {
             
@@ -54,6 +60,9 @@ exports.save = function(req,res){
     var input = JSON.parse(JSON.stringify(req.body));
     
     req.getConnection(function (err, connection) {
+        if(err){
+            console.log("ERROR : %s ", err);
+        }
         
         var data = {
             
@@ -86,6 +95,10 @@ exports.save_edit = function(req,res){
     
     req.getConnection(function (err, connection) {
         
+        if(err){
+            console.log("ERROR : %s ", err);
+        }
+        
         var data = {
             
             name    : input.name,
@@ -115,6 +128,11 @@ exports.delete_customer = function(req,res){
     
      req.getConnection(function (err, connection) {
         
+        if(err){
+            console.log("ERROR : %s ", err);
+        }
+        
+
         connection.query("DELETE FROM customer  WHERE id = ? ",[id], function(err, rows)
         {
             
